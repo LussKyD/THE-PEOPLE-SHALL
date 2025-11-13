@@ -3,13 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kids Constitution — Study & Explore (Bi-lingual)</title>
+  <title>The People Shall — Learn. Understand. Protect.</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1>Kids Constitution</h1>
+  <div id="splash" class="splash">
+    <div class="flag-wrap">
+      <div class="flag"></div>
+    </div>
+    <div class="splash-text">
+      <h1>The People Shall</h1>
+      <p class="tag">Learn. Understand. Protect.</p>
+    </div>
+  </div>
+
+  <header class="site-header" role="banner">
+    <div class="title">
+      <span class="logo-text">The People Shall</span>
+      <small class="underline-flag" aria-hidden="true"></small>
+    </div>
     <div class="header-controls">
       <select id="langToggle" aria-label="Language toggle">
         <option value="en">English</option>
@@ -19,7 +32,7 @@
     </div>
   </header>
 
-  <nav id="menu" class="hidden">
+  <nav id="menu" class="hidden" role="navigation">
     <a href="#" data-section="home">Home</a>
     <a href="#" data-section="learn">Learn</a>
     <a href="#" data-section="summary">Constitution Summary</a>
@@ -28,241 +41,78 @@
     <a href="#" data-section="about">About</a>
   </nav>
 
-  <main id="content">
+  <main id="content" role="main">
     <section id="home" class="section active">
-      <h2 tabindex="-1">Welcome</h2>
-      <p data-en>Learn the big ideas of the Constitution in fun, simple words. Use the menu to explore lessons, take quizzes, or read the Constitution summaries.</p>
-      <p data-sw class="hidden">Jifunze mawazo makuu ya Katiba kwa maneno rahisi. Tumia menyu kuchunguza masomo, kujibu maswali, au kusoma muhtasari wa Katiba.</p>
+      <h2 tabindex="-1" data-en>Welcome</h2>
+      <h2 tabindex="-1" data-sw class="hidden">Karibu</h2>
+      <p data-en>Welcome to <strong>The People Shall</strong> — a bilingual platform to learn the Constitution of Kenya in a friendly way.</p>
+      <p data-sw class="hidden">Karibu kwenye <strong>The People Shall</strong> — jukwaa la lugha mbili kujifunza Katiba kwa njia ya kirafiki.</p>
 
       <div class="card-row">
         <div class="card" onclick="openSection('learn')">
           <h3 data-en>Start Learning</h3><h3 data-sw class="hidden">Anza Kujifunza</h3>
-          <p data-en>Short lessons with examples and pictures.</p>
-          <p data-sw class="hidden">Masomo mafupi na mifano.</p>
+          <p data-en>Short lessons and examples for young learners.</p>
+          <p data-sw class="hidden">Masomo mafupi na mifano kwa wanafunzi.</p>
         </div>
         <div class="card" onclick="openSection('summary')">
           <h3 data-en>Constitution Summary</h3><h3 data-sw class="hidden">Muhtasari wa Katiba</h3>
-          <p data-en>Read helpful summaries of every chapter (English + Kiswahili).</p>
-          <p data-sw class="hidden">Soma muhtasari wa kila sura (Kiingereza + Kiswahili).</p>
+          <p data-en>Detailed chapter summaries with links to the official document.</p>
+          <p data-sw class="hidden">Muhtasari wa sura kwa undani na viungo kwa hati rasmi.</p>
         </div>
       </div>
     </section>
 
     <section id="learn" class="section">
       <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>Simple Constitution Lessons</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Masomo Rahisi ya Katiba</h2>
-
+      <h2 tabindex="-1" data-en>Simple Lessons</h2>
+      <h2 tabindex="-1" data-sw class="hidden">Masomo Rahisi</h2>
       <article class="lesson">
-        <h3 data-en>1 — What is a Constitution?</h3>
-        <h3 data-sw class="hidden">1 — Katiba ni Nini?</h3>
-        <p data-en>A constitution is the rulebook for how a country runs. It explains rights, duties, and how leaders are chosen.</p>
-        <p data-sw class="hidden">Katiba ni mwongozo wa jinsi nchi inavyoendeshwa. Inaelezea haki, wajibu, na jinsi viongozi wanavyopendekezwa.</p>
+        <h3 data-en>What is a Constitution?</h3>
+        <p data-en>A Constitution is the highest law of the land. It explains rights, leadership, and how the country is run.</p>
+        <p data-sw class="hidden">Katiba ni sheria kuu. Inaelezea haki, uongozi, na jinsi nchi inavyoendeshwa.</p>
       </article>
-      <p class="note" data-en>Tip: Switch language at the top right.</p>
-      <p class="note hidden" data-sw>Kidokezo: Badilisha lugha upande wa juu kulia.</p>
     </section>
 
     <section id="summary" class="section reader">
       <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>Constitution Summary — Reader Mode</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Muhtasari wa Katiba — Njia ya Kusoma</h2>
+      <h2 tabindex="-1" data-en>Constitution Summary — Reader</h2>
+      <h2 tabindex="-1" data-sw class="hidden">Muhtasari wa Katiba — Msomaji</h2>
 
       <div class="reader-controls">
         <input id="searchCh" placeholder="Search chapters..." aria-label="Search chapters" />
-        <a id="officialLink" class="official" target="_blank" rel="noopener noreferrer">Read Official Version (PDF)</a>
+        <a id="officialRoot" class="official" target="_blank" rel="noopener noreferrer" href="{parliament_pdf}">Official PDF (Parliament of Kenya)</a>
       </div>
 
       <div id="chapters">
         
     <article id="chapter-1" class="chapter">
       <h3>Chapter One — Sovereignty of the People</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter says that power in Kenya belongs to the people. It explains that citizens are the source of authority — through voting, community participation, and law. For young people, it means your voice matters: when you grow up you will vote and can shape change. For older generations, it reminds leaders to listen and serve the people responsibly.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inasema kwamba mamlaka nchini Kenya inatokana na watu. Inaelezea kwamba wananchi ndicho chanzo cha mamlaka—kupitia kupiga kura, kushiriki jamii, na sheria. Kwa vijana, inamaanisha sauti yako ina umuhimu: ukiikua utapiga kura na kuweza kuleta mabadiliko. Kwa vizazi vya wazee, inawakumbusha viongozi kusikiliza na kuwahudumia watu kwa uwajibikaji.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
+      <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter confirms that ultimate power belongs to the Kenyan people. It explains how authority flows from citizens — through voting, public participation, and the rule of law. For youth, imagine your school elections as a tiny version of this idea: choosing class leaders is a way of practising how people choose representatives. For older generations, it’s a reminder that leaders answer to the people and must serve the public interest.</p></div>
+      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inathibitisha kwamba madaraka ya juu yanatokana na watu wa Kenya. Inaelezea jinsi mamlaka inavyotokana na wananchi—kupitia kupiga kura, ushiriki wa umma, na utawala wa sheria. Kwa vijana, fikiria uchaguzi wa darasa kama toleo dogo la wazo hili: kuchagua viongozi wa darasa ni njia ya kuzoea jinsi watu wanavyoteua wawakilishi. Kwa wazee, ni ukumbusho kwamba viongozi wanawajibika kwa watu na wanapaswa kuhudumia maslahi ya umma.</p></div>
+      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#chapter-1">Open chapter on Constitute</a></p>
     </article>
     
-
-    <article id="chapter-2" class="chapter">
-      <h3>Chapter Two — The Republic</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter describes Kenya as a republic and sets out national symbols and values like patriotism and unity. It explains the structure and name of the country and what it stands for. Young people learn why national identity matters; older people are reminded of shared responsibilities to protect those values.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaelezea Kenya kama jamhuri na kuweka alama za kitaifa na thamani kama utaifa na umoja. Inaelezea muundo na jina la nchi na inasimulia mawazo muhimu. Vijana wanajifunza kwa nini utambulisho wa kitaifa ni muhimu; wazee wanakumbushwa wajibu wa pamoja kulinda maadili hayo.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-3" class="chapter">
-      <h3>Chapter Three — Citizenship</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter explains who is a citizen and how citizenship can be gained or lost. It shows the rights and duties that come with being Kenyan. For youth, it clarifies belonging and the path to civic participation. For older listeners, it covers legal rules on nationality and family ties.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaelezea ni nani raia na jinsi uraia unavyopatikana au kupotea. Inaonyesha haki na wajibu vinavyokuja pamoja na kuwa Mkenya. Kwa vijana, inafafanua uhusiano wa kimaisha na njia ya kushiriki kitaifa. Kwa wazee, inajadili sheria za uraia na uhusiano wa kifamilia.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
     <article id="chapter-4" class="chapter">
       <h3>Chapter Four — Bill of Rights</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>The Bill of Rights lists the basic freedoms and protections every person in Kenya has — like equality, freedom of expression, and the right to education and health. It is one of the most important chapters because it protects people from abuse and unfair treatment. For young people, it means you have basic rights to safety, school, and dignity. For older generations, it speaks to responsibility: protecting rights for all citizens.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura ya Haki za Msingi inaorodhesha uhuru na ulinzi wa msingi ambao kila mtu Kenya anastahili—kama usawa, uhuru wa kujieleza, na haki ya elimu na afya. Ni moja ya sura muhimu kwa sababu inalinda watu dhidi ya unyanyasaji na kutendewa kinyume. Kwa vijana, inamaanisha una haki za msingi za usalama, shule, na heshima. Kwa wazee, inazungumzia wajibu: kulinda haki kwa raia wote.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
+      <div class="lang lang-en"><strong>English — Summary</strong><p>The Bill of Rights lists freedoms and protections for everyone — like equality, freedom of expression, and the right to education and healthcare. It’s central because it says what the state must protect. For young people this means the right to attend school, be safe, and speak up. Older generations should see it as the legal standard that protects vulnerable people and holds institutions to account.</p></div>
+      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura ya Haki za Msingi inaorodhesha uhuru na ulinzi kwa kila mtu—kama usawa, uhuru wa kujieleza, na haki ya elimu na huduma za afya. Ni muhimu kwa sababu inaelezea kile ambacho serikali inapaswa kulinda. Kwa vijana inamaanisha haki ya kwenda shuleni, kuwa salama, na kusema mawazo yako. Vizazi vikongwe vinapaswa kuiona kama viwango vya kisheria vinavyolinda watu walio katika hatari na kuwawajibisha taasisi.</p></div>
+      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#chapter-4">Open chapter on Constitute</a></p>
     </article>
     
-
-    <article id="chapter-5" class="chapter">
-      <h3>Chapter Five — The Executive</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter explains how the President and the executive branch lead the country. It describes duties like enforcing laws, directing national policy, and being accountable to the people. Young readers learn how leaders are chosen and the limits of their power; older readers see rules designed to ensure leaders serve, not rule unchecked.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaelezea jinsi Rais na tawi la utekelezaji vinavyoongoza nchi. Inataja majukumu kama kutekeleza sheria, kuongoza sera za kitaifa, na kuwajibika kwa watu. Vijana wanajifunza jinsi viongozi wanavyoteuliwa na mipaka ya mamlaka yao; wazee wanaona sheria zilizowekwa kuhakikisha viongozi wahudumu, sio kutawala bila ukaguzi.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-6" class="chapter">
-      <h3>Chapter Six — Parliament</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>Parliament makes and changes laws. This chapter explains the role of the National Assembly and the Senate, how laws are debated, and how representatives speak for communities. For youth, it’s a lesson in how ideas turn into rules. For older generations, it emphasizes representation, oversight, and the importance of fair lawmaking.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Bunge linatunga na kurekebisha sheria. Sura hii inaelezea jukumu la Bunge la Taifa na Seneti, jinsi sheria zinavyopitishwa, na jinsi wabunge wanavyowakilisha jamii. Kwa vijana, ni somo la jinsi mawazo yanavyokuwa sheria. Kwa wazee, inasisitiza uwakilishi, ukaguzi, na umuhimu wa kutunga sheria kwa haki.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-7" class="chapter">
-      <h3>Chapter Seven — The Judiciary</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>The Judiciary interprets the law and protects rights. This chapter explains courts' role, independence, and how judges must be fair. Young people learn why courts matter when rights are broken. Older readers are reminded that an independent judiciary is key to a healthy democracy.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Mahakama zinafafanua sheria na kulinda haki. Sura hii inaelezea jukumu la mahakama, uhuru wake, na jinsi majaji wanavyopaswa kuwa wa haki. Vijana wanajifunza kwa nini mahakama ni muhimu wakati haki zinaporuzwa. Wazee wanakumbushwa kwamba mahakama huru ni msingi wa demokrasia nzuri.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
     <article id="chapter-8" class="chapter">
       <h3>Chapter Eight — Devolved Government</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter sets out devolution: sharing power with county governments so services are closer to people. It explains county roles like health, local roads, and community services. For youth, devolution shows how local choices affect day-to-day life. For older generations, it offers a way to improve services and involve citizens locally.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaweka msingi wa ugatuzi: kugawa mamlaka kwa serikali za kaunti ili huduma ziwe karibu na watu. Inaelezea majukumu ya kaunti kama afya, barabara za ndani, na huduma za jamii. Kwa vijana, ugatuzi unaonyesha jinsi maamuzi ya karibu yanavyoathiri maisha ya kila siku. Kwa wazee, ni njia ya kuboresha huduma na kuwashirikisha wananchi ngazi ya mtaa.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
+      <div class="lang lang-en"><strong>English — Summary</strong><p>Devolution means sharing power with county governments. Counties manage local needs like health clinics, local roads, and markets. For young people, this shows how nearby leaders influence daily life — like fixing a school road or funding a clinic. For older generations, devolution is about bringing services closer and making government more responsive.</p></div>
+      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Ugatuzi ni kugawana mamlaka na serikali za kaunti. Kaunti zinashughulikia mahitaji ya karibu kama vituo vya afya, barabara za ndani, na masoko. Kwa vijana, inaonyesha jinsi viongozi wa karibu wanavyoathiri maisha ya kila siku—kama kukarabati barabara ya shule au kufadhili kituo cha afya. Kwa wazee, ugatuzi ni kuleta huduma karibu na watu na kufanya serikali iwe nyeti zaidi.</p></div>
+      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#chapter-8">Open chapter on Constitute</a></p>
     </article>
     
-
-    <article id="chapter-9" class="chapter">
-      <h3>Chapter Nine — Public Finance and Accountability</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter explains how public money is collected and spent, and how leaders must be accountable for it. It sets rules for budgets, taxation, and transparency. Youth learn why honesty with public funds matters; older readers see tools that protect public resources from misuse.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaelezea jinsi fedha za umma zinavyokusanywa na kutumika, na jinsi viongozi wanavyopaswa kuwajibika. Inaweka sheria za bajeti, ushuru, na uwazi. Vijana wanajifunza kwa nini uadilifu kwa fedha za umma ni muhimu; wazee wanaona zana za kulinda rasilimali za umma dhidi ya matumizi mabaya.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
+    <article id="schedules" class="chapter">
+      <h3>Schedules — Technical Details</h3>
+      <div class="lang lang-en"><strong>English — Summary</strong><p>Schedules are attachments to the Constitution that list details needed to apply the main chapters — like oath forms, transitional rules, and electoral details. Think of schedules like the appendix of a book: not for quick reading, but essential for officials and teachers who implement the law.</p></div>
+      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Ratiba ni nyongeza za Katiba ambazo zinaorodhesha maelezo yanayohitajika kutekeleza sura kuu—kama fomu za kiapo, sheria za mpito, na maelezo ya uchaguzi. Fikiria ratiba kama nyongeza ya kitabu: si kwa kusoma kwa haraka, lakini muhimu kwa watendaji na walimu wanaotekeleza sheria.</p></div>
+      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#schedules">Open chapter on Constitute</a></p>
     </article>
     
-
-    <article id="chapter-10" class="chapter">
-      <h3>Chapter Ten — Leadership and Integrity</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter sets standards for people in leadership — honesty, ethics, and public service. It includes rules to avoid conflicts of interest and corruption. For young people, it teaches values to expect from leaders; for older generations, it reinforces systems to hold leaders to account.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaweka viwango kwa watu katika uongozi—uaminifu, maadili, na huduma kwa umma. Inajumuisha sheria za kuepuka migongano ya maslahi na ufisadi. Kwa vijana, inafundisha maadili tunayotarajia kwa viongozi; kwa wazee, inathibitisha mifumo ya kuwawajibisha viongozi.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-11" class="chapter">
-      <h3>Chapter Eleven — Security</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter covers national security and the police. It balances the need for safety with respect for human rights. Young people learn that security is meant to protect communities, not threaten freedoms. Older readers consider how to support safety while guarding rights.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inahusu usalama wa taifa na polisi. Inalinganisha haja ya usalama na heshima kwa haki za binadamu. Vijana wanajifunza kwamba usalama unalenga kulinda jamii, siyo kutishia uhuru. Wazee wanafikiria jinsi ya kuunga mkono usalama huku wakilinda haki.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-12" class="chapter">
-      <h3>Chapter Twelve — Land and Environmental Management</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter deals with land, ownership, and the environment. It explains fair use of land, protection of nature, and responsibilities to future generations. For youth, it links to ideas of climate and conservation; for older generations, it clarifies rights, disputes, and stewardship.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inahusu ardhi, umiliki, na mazingira. Inaelezea matumizi ya haki ya ardhi, ulinzi wa asili, na majukumu kwa vizazi vijavyo. Kwa vijana, inahusiana na masuala ya hali ya hewa na uhifadhi; kwa wazee, inafafanua haki, mizozo, na usimamizi wa ardhi.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-13" class="chapter">
-      <h3>Chapter Thirteen — Environment and Natural Resources</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter focuses on protecting the environment and using natural resources responsibly. It stresses conservation, sustainable use, and benefit-sharing. Young readers see their role in caring for nature; older readers are reminded about policies that balance growth and protection.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inalenga ulinzi wa mazingira na matumizi ya rasilimali kwa uwajibikaji. Inasisitiza uhifadhi, matumizi endelevu, na ugawaji wa manufaa. Vijana wanaona jukumu lao katika kutunza asili; wazee wanakumbushwa kuhusu sera zinazolingana ukuaji na ulinzi.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-14" class="chapter">
-      <h3>Chapter Fourteen — The Public Service</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter sets out how public servants should work: professionally and without unfair bias. It covers hiring, promotion, and conduct. For youth, it shows what to expect from public institutions; for older readers, it explains standards that keep government services fair and reliable.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaweka jinsi watumishi wa umma wanavyopaswa kufanya kazi: kwa taaluma na bila upendeleo. Inahusu ajira, kuinuliwa cheo, na mwenendo. Kwa vijana, inaonyesha watakavyotarajia kutoka taasisi za umma; kwa wazee, inafafanua viwango vinavyofanya huduma za serikali ziwe za haki na za kuaminika.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-15" class="chapter">
-      <h3>Chapter Fifteen — Devolved Government (Detailed Provisions)</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter gives more details about county governments and how they operate alongside national government. It explains funding, functions, and cooperation. Young readers see how local leaders impact services; older readers get the legal picture for county administration and local democracy.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inatoa maelezo zaidi kuhusu serikali za kaunti na jinsi zinavyofanya kazi sambamba na serikali ya taifa. Inaelezea ufadhili, kazi, na ushirikiano. Vijana wanaona jinsi viongozi wa mitaa wanavyoathiri huduma; wazee wanapata taswira ya kisheria ya utawala wa kaunti na demokrasia ya kienyeji.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-16" class="chapter">
-      <h3>Chapter Sixteen — Public Finance (Detailed)</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter expands on how budgets, national revenue, and spending are managed. It includes rules to check misuse and ensure fairness in resource allocation. For youth, it’s a basic lesson in money for the country; for older readers, it explains the systems that protect economic fairness.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inapanua jinsi bajeti, mapato ya taifa, na matumizi yanavyosimamiwa. Inajumuisha sheria za kuzuia matumizi mabaya na kuhakikisha usawa katika ugawaji wa rasilimali. Kwa vijana, ni somo la msingi kuhusu fedha za nchi; kwa wazee, inafafanua mifumo inayolinda usawa wa kiuchumi.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-17" class="chapter">
-      <h3>Chapter Seventeen — Transitional and General Provisions</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter contains rules needed when the Constitution was first put into effect and other general legal details. It helps explain how older laws were adjusted and how the country moved to the new system. Young people can learn why changes are gradual; older readers see how legal transitions are handled.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii ina sheria zilizohitajika wakati Katiba ilipoanzishwa na maelezo mengine ya kisheria kwa ujumla. Inasaidia kuelezea jinsi sheria za zamani zilivyorekebishwa na jinsi nchi ilivyohamia mfumo mpya. Vijana wanaweza kujifunza kwa nini mabadiliko huwa taratibu; wazee wanaona jinsi mabadiliko ya kisheria yanavyoratibiwa.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-
-    <article id="chapter-18" class="chapter">
-      <h3>Chapter Eighteen — Amendment of the Constitution</h3>
-      <div class="content">
-        <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter explains how the Constitution can be changed in the future. It sets strict rules so changes are careful and reflect what people want. For youth, it shows that constitutions evolve but not quickly; for older generations, it offers safeguards so the basic rules are not changed without broad agreement.</p></div>
-        <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inaelezea jinsi Katiba inaweza kubadilishwa katika siku zijazo. Inaweka sheria kali ili mabadiliko yafanywe kwa uangalifu na yaakisi matakwa ya watu. Kwa vijana, inaonyesha kwamba katiba hubadilika lakini si haraka; kwa wazee, inatoa kinga ili sheria za msingi zisibadilishwe bila makubaliano mapana.</p></div>
-      </div>
-      <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-    </article>
-    
-<article id="schedules" class="chapter">
-  <h3>Schedules</h3>
-  <div class="content">
-    <div class="lang lang-en"><strong>English — Summary</strong><p>Schedules are attachments that provide detailed lists, forms, and technical rules that support the main Constitution chapters. They include specific matters like oaths, electoral details, and transitional arrangements. Think of schedules as the 'appendix' that helps officials apply the rules in practice.</p></div>
-    <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Ratiba ni nyongeza ambazo zinaorodhesha kwa undani, fomu, na sheria za kiufundi ambazo zinaunga mkono sura za Katiba. Zinajumuisha mambo maalum kama viapo, maelezo ya uchaguzi, na mipango ya mpito. Fikiria ratiba kama 'nyongeza' inayosaidia watendaji kutekeleza sheria vitendo.</p></div>
-  </div>
-  <p><a class="official" target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">📄 Read Official Version (PDF)</a></p>
-</article>
-
       </div>
     </section>
 
@@ -286,25 +136,23 @@
       <h2 tabindex="-1" data-en>Glossary</h2>
       <h2 tabindex="-1" data-sw class="hidden">Kamusi</h2>
       <dl>
-        <dt data-en>Constitution</dt><dd data-en>A country's rulebook.</dd>
-        <dt data-sw class="hidden">Katiba</dt><dd data-sw class="hidden">Mwongozo wa nchi.</dd>
-        <dt data-en>Rights</dt><dd data-en>Things everyone should have.</dd>
-        <dt data-en>Citizen</dt><dd data-en>A person who belongs to a country.</dd>
+        <dt data-en>Constitution</dt><dd data-en>The country's highest law.</dd>
+        <dt data-sw class="hidden">Katiba</dt><dd data-sw class="hidden">Sheria kuu ya nchi.</dd>
       </dl>
     </section>
 
     <section id="about" class="section">
       <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>About this App</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Kuhusu App hii</h2>
-      <p data-en>This app simplifies ideas from the Constitution of Kenya (2010) into kid- and youth-friendly summaries. For the full official document, use the link in the Summary section.</p>
-      <p data-sw class="hidden">App hii inafupisha mawazo kutoka Katiba ya Kenya (2010) kwa muhtasari unaofaa watoto na vijana. Kwa hati kamili, tumia kiungo sehemu ya Muhtasari.</p>
-      <p><small data-en>Sources: Parliament of Kenya (official PDF).</small><small data-sw class="hidden">Vyanzo: Bunge la Kenya (PDF rasmi).</small></p>
+      <h2 tabindex="-1" data-en>About</h2>
+      <h2 tabindex="-1" data-sw class="hidden">Kuhusu</h2>
+      <p data-en>This app simplifies and explains the Constitution. It includes links to the official document and chapter-level anchors for deeper reading.</p>
+      <p data-sw class="hidden">App hii inafupisha na kuelezea Katiba. Inajumuisha viungo kwa hati rasmi na viungo vya sura kwa usomaji wa undani.</p>
+      <p class="credits">Powered by DRACO DYNASTY · Kenya</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <small>Made for learners • Bilingual • Kid-safe</small>
+    <small><a href="{parliament_pdf}" target="_blank" rel="noopener noreferrer">Official Constitution (Parliament of Kenya)</a> · <a href="{constitute_url}" target="_blank" rel="noopener noreferrer">Constitute Project (chapter anchors)</a></small>
   </footer>
 
   <script src="script.js"></script>
