@@ -1,15 +1,6 @@
-# Kids Constitution — Beginner Web App
+# Kids Constitution — Study & Explore Edition (Bi-lingual)
 
-This is a small, mobile-first web app prototype designed to teach school kids basic ideas about a constitution.
-It is intentionally simple so you can upload everything to GitHub using only the GitHub web interface and host on GitHub Pages.
+This release (v1.1) merges the original kid-friendly app with detailed, generational summaries of the Constitution of Kenya (2010).
+It contains bilingual summaries (English + Kiswahili) organized by Chapter 1–18 and Schedules, and links to the official PDF (Parliament of Kenya).
 
-## What is included
-- `index.html` — single-page app
-- `styles.css` — lightweight styles
-- `script.js` — navigation + quiz logic
-- `manifest.json` — makes the site installable as a web app
-- `icons/` — app icons
-- `README.md` and `LICENSE` files
-
-## How to use
-See the step-by-step guide in the accompanying instructions document or the GitHub Pages guide I provide after you download the ZIP.
+**Important:** This app contains summaries for educational use. For the full legal text use the official PDF link inside the app (Parliament of Kenya).
