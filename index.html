@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kids Constitution — Learn & Play</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Kids Constitution</h1>
+    <button id="menuBtn" aria-label="Open menu">☰</button>
+  </header>
+
+  <nav id="menu" class="hidden">
+    <a href="#" data-section="home">Home</a>
+    <a href="#" data-section="learn">Learn</a>
+    <a href="#" data-section="quiz">Quiz</a>
+    <a href="#" data-section="glossary">Glossary</a>
+    <a href="#" data-section="about">About</a>
+  </nav>
+
+  <main id="content">
+    <section id="home" class="section active">
+      <h2>Welcome</h2>
+      <p>Learn the big ideas of the Constitution in fun, simple words. Tap "Learn" to start or take a quick quiz.</p>
+      <div class="card-row">
+        <div class="card" onclick="openSection('learn')">
+          <h3>Start Learning</h3>
+          <p>Short lessons with examples and pictures.</p>
+        </div>
+        <div class="card" onclick="openSection('quiz')">
+          <h3>Take a Quiz</h3>
+          <p>Easy questions to check what you remember.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="learn" class="section">
+      <button class="back" onclick="openSection('home')">← Back</button>
+      <h2>Simple Constitution Lessons</h2>
+
+      <article class="lesson">
+        <h3>1 — What is a Constitution?</h3>
+        <p>A constitution is a set of rules for how a country is run. It explains who makes decisions, what rights people have, and how leaders are chosen.</p>
+      </article>
+
+      <article class="lesson">
+        <h3>2 — Rights</h3>
+        <p>Rights are things every person should have — like safety, a chance to go to school, and being treated fairly.</p>
+      </article>
+
+      <article class="lesson">
+        <h3>3 — Government and Leaders</h3>
+        <p>The constitution shows how the government is organised and how leaders should behave. It helps people know who to ask when things go wrong.</p>
+      </article>
+
+      <p class="note">Tip: Use the glossary if you see a word you don't know.</p>
+    </section>
+
+    <section id="quiz" class="section">
+      <button class="back" onclick="openSection('home')">← Back</button>
+      <h2>Quick Quiz</h2>
+      <div id="quizCard" class="quiz-card">
+        <p id="question">Question will appear here.</p>
+        <div id="answers"></div>
+        <div id="quizResult" class="result" aria-live="polite"></div>
+        <div class="quiz-controls">
+          <button id="nextBtn" onclick="nextQuestion()">Next</button>
+          <button id="restartBtn" onclick="startQuiz()" class="hidden">Restart</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section">
+      <button class="back" onclick="openSection('home')">← Back</button>
+      <h2>Glossary</h2>
+      <dl>
+        <dt>Constitution</dt><dd>A country’s rulebook.</dd>
+        <dt>Rights</dt><dd>Things everyone should have.</dd>
+        <dt>Citizen</dt><dd>A person who belongs to a country and has rights.</dd>
+      </dl>
+    </section>
+
+    <section id="about" class="section">
+      <button class="back" onclick="openSection('home')">← Back</button>
+      <h2>About this App</h2>
+      <p>This is a beginner-friendly prototype to help school kids learn the core ideas behind a constitution. Use GitHub Pages to host it as a mobile web app.</p>
+      <p><strong>Note:</strong> Add official constitutional text or consult a teacher for precise legal definitions before using this in classrooms.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>Made for learners • Offline-friendly • Kid-safe</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
