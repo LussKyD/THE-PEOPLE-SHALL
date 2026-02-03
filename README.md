@@ -1,5 +1,5 @@
 The People Shall — v1.2
-A bilingual educational app for the Constitution of Kenya. Includes chapter summaries and links to official sources.
+A bilingual civic law reader for the Constitution of Kenya. Dual-pane original law + simplified analysis, keyword search, read-aloud support, and offline-ready core content.
 
 ## UI/UX roadmap
 
