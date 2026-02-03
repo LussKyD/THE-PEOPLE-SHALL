@@ -8,151 +8,91 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="splash" class="splash">
-    <div class="flag-wrap">
-      <div class="flag"></div>
-    </div>
-    <div class="splash-text">
-      <h1>The People Shall</h1>
-      <p class="tag">Learn. Understand. Protect.</p>
-    </div>
-  </div>
-
   <header class="site-header" role="banner">
-    <div class="title">
+    <div class="brand">
       <span class="logo-text">The People Shall</span>
-      <small class="underline-flag" aria-hidden="true"></small>
+      <span class="tagline">Kenya's Constitution, made clear for every Mwananchi.</span>
     </div>
-    <div class="header-controls">
-      <select id="langToggle" aria-label="Language toggle">
+    <div class="header-actions">
+      <label class="sr-only" for="languageSelect">Language</label>
+      <select id="languageSelect" aria-label="Language toggle">
         <option value="en">English</option>
         <option value="sw">Kiswahili</option>
+        <option value="sheng" disabled>Sheng (coming soon)</option>
+        <option value="ki" disabled>Gikuyu (coming soon)</option>
+        <option value="luo" disabled>Dholuo (coming soon)</option>
       </select>
-      <button id="menuBtn" aria-label="Open menu">☰</button>
     </div>
   </header>
 
-  <nav id="menu" class="hidden" role="navigation">
-    <a href="#" data-section="home">Home</a>
-    <a href="#" data-section="learn">Learn</a>
-    <a href="#" data-section="summary">Constitution Summary</a>
-    <a href="#" data-section="quiz">Quiz</a>
-    <a href="#" data-section="glossary">Glossary</a>
-    <a href="#" data-section="about">About</a>
-  </nav>
+  <main class="app" role="main">
+    <section class="hero">
+      <h1>Know your rights in minutes</h1>
+      <p>Search by everyday topics and read the original law next to a simplified, conversational explanation.</p>
+    </section>
 
-  <main id="content" role="main">
-    <section id="home" class="section active">
-      <h2 tabindex="-1" data-en>Welcome</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Karibu</h2>
-      <p data-en>Welcome to <strong>The People Shall</strong> — a bilingual platform to learn the Constitution of Kenya in a friendly way.</p>
-      <p data-sw class="hidden">Karibu kwenye <strong>The People Shall</strong> — jukwaa la lugha mbili kujifunza Katiba kwa njia ya kirafiki.</p>
+    <section class="controls" aria-label="Search and filters">
+      <div class="search">
+        <label for="searchInput">Search by keyword</label>
+        <input id="searchInput" type="search" placeholder="Search: arrest, land, taxes, education" autocomplete="off" />
+      </div>
+      <div class="filter-group" role="group" aria-label="Filter documents">
+        <span class="filter-label">Filter</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="constitution">Constitution</button>
+        <button class="filter-btn" data-filter="act">Acts of Parliament</button>
+      </div>
+      <div class="status" aria-live="polite">
+        <span id="offlineStatus" class="status-pill">Offline ready</span>
+      </div>
+    </section>
 
-      <div class="card-row">
-        <div class="card" onclick="openSection('learn')">
-          <h3 data-en>Start Learning</h3><h3 data-sw class="hidden">Anza Kujifunza</h3>
-          <p data-en>Short lessons and examples for young learners.</p>
-          <p data-sw class="hidden">Masomo mafupi na mifano kwa wanafunzi.</p>
+    <div class="layout">
+      <aside class="list-panel" aria-label="Article list">
+        <h2>Browse Articles</h2>
+        <div id="articleList" class="article-list"></div>
+      </aside>
+
+      <section class="reader-panel" aria-live="polite">
+        <div class="reader-header">
+          <div>
+            <h2 id="articleTitle">Select an article</h2>
+            <p id="articleMeta" class="meta"></p>
+          </div>
+          <div class="reader-actions">
+            <a id="sourceLink" class="link-button" target="_blank" rel="noopener noreferrer">Official source</a>
+          </div>
         </div>
-        <div class="card" onclick="openSection('summary')">
-          <h3 data-en>Constitution Summary</h3><h3 data-sw class="hidden">Muhtasari wa Katiba</h3>
-          <p data-en>Detailed chapter summaries with links to the official document.</p>
-          <p data-sw class="hidden">Muhtasari wa sura kwa undani na viungo kwa hati rasmi.</p>
+
+        <div class="dual-pane">
+          <article class="pane">
+            <h3>Original law text</h3>
+            <p id="originalText"></p>
+          </article>
+          <article class="pane">
+            <div class="pane-header">
+              <h3>Simplified analysis</h3>
+              <div class="audio-controls">
+                <button id="readAloudBtn">Read aloud</button>
+                <button id="stopAudioBtn" class="secondary">Stop</button>
+              </div>
+            </div>
+            <p id="simplifiedText"></p>
+            <div class="examples">
+              <h4>Real world example</h4>
+              <p id="exampleText"></p>
+            </div>
+          </article>
         </div>
-      </div>
-    </section>
 
-    <section id="learn" class="section">
-      <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>Simple Lessons</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Masomo Rahisi</h2>
-      <article class="lesson">
-        <h3 data-en>What is a Constitution?</h3>
-        <p data-en>A Constitution is the highest law of the land. It explains rights, leadership, and how the country is run.</p>
-        <p data-sw class="hidden">Katiba ni sheria kuu. Inaelezea haki, uongozi, na jinsi nchi inavyoendeshwa.</p>
-      </article>
-    </section>
-
-    <section id="summary" class="section reader">
-      <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>Constitution Summary — Reader</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Muhtasari wa Katiba — Msomaji</h2>
-
-      <div class="reader-controls">
-        <input id="searchCh" placeholder="Search chapters..." aria-label="Search chapters" />
-        <a id="officialRoot" class="official" target="_blank" rel="noopener noreferrer" href="{parliament_pdf}">Official PDF (Parliament of Kenya)</a>
-      </div>
-
-      <div id="chapters">
-        
-    <article id="chapter-1" class="chapter">
-      <h3>Chapter One — Sovereignty of the People</h3>
-      <div class="lang lang-en"><strong>English — Summary</strong><p>This chapter confirms that ultimate power belongs to the Kenyan people. It explains how authority flows from citizens — through voting, public participation, and the rule of law. For youth, imagine your school elections as a tiny version of this idea: choosing class leaders is a way of practising how people choose representatives. For older generations, it’s a reminder that leaders answer to the people and must serve the public interest.</p></div>
-      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura hii inathibitisha kwamba madaraka ya juu yanatokana na watu wa Kenya. Inaelezea jinsi mamlaka inavyotokana na wananchi—kupitia kupiga kura, ushiriki wa umma, na utawala wa sheria. Kwa vijana, fikiria uchaguzi wa darasa kama toleo dogo la wazo hili: kuchagua viongozi wa darasa ni njia ya kuzoea jinsi watu wanavyoteua wawakilishi. Kwa wazee, ni ukumbusho kwamba viongozi wanawajibika kwa watu na wanapaswa kuhudumia maslahi ya umma.</p></div>
-      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#chapter-1">Open chapter on Constitute</a></p>
-    </article>
-    
-    <article id="chapter-4" class="chapter">
-      <h3>Chapter Four — Bill of Rights</h3>
-      <div class="lang lang-en"><strong>English — Summary</strong><p>The Bill of Rights lists freedoms and protections for everyone — like equality, freedom of expression, and the right to education and healthcare. It’s central because it says what the state must protect. For young people this means the right to attend school, be safe, and speak up. Older generations should see it as the legal standard that protects vulnerable people and holds institutions to account.</p></div>
-      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Sura ya Haki za Msingi inaorodhesha uhuru na ulinzi kwa kila mtu—kama usawa, uhuru wa kujieleza, na haki ya elimu na huduma za afya. Ni muhimu kwa sababu inaelezea kile ambacho serikali inapaswa kulinda. Kwa vijana inamaanisha haki ya kwenda shuleni, kuwa salama, na kusema mawazo yako. Vizazi vikongwe vinapaswa kuiona kama viwango vya kisheria vinavyolinda watu walio katika hatari na kuwawajibisha taasisi.</p></div>
-      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#chapter-4">Open chapter on Constitute</a></p>
-    </article>
-    
-    <article id="chapter-8" class="chapter">
-      <h3>Chapter Eight — Devolved Government</h3>
-      <div class="lang lang-en"><strong>English — Summary</strong><p>Devolution means sharing power with county governments. Counties manage local needs like health clinics, local roads, and markets. For young people, this shows how nearby leaders influence daily life — like fixing a school road or funding a clinic. For older generations, devolution is about bringing services closer and making government more responsive.</p></div>
-      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Ugatuzi ni kugawana mamlaka na serikali za kaunti. Kaunti zinashughulikia mahitaji ya karibu kama vituo vya afya, barabara za ndani, na masoko. Kwa vijana, inaonyesha jinsi viongozi wa karibu wanavyoathiri maisha ya kila siku—kama kukarabati barabara ya shule au kufadhili kituo cha afya. Kwa wazee, ugatuzi ni kuleta huduma karibu na watu na kufanya serikali iwe nyeti zaidi.</p></div>
-      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#chapter-8">Open chapter on Constitute</a></p>
-    </article>
-    
-    <article id="schedules" class="chapter">
-      <h3>Schedules — Technical Details</h3>
-      <div class="lang lang-en"><strong>English — Summary</strong><p>Schedules are attachments to the Constitution that list details needed to apply the main chapters — like oath forms, transitional rules, and electoral details. Think of schedules like the appendix of a book: not for quick reading, but essential for officials and teachers who implement the law.</p></div>
-      <div class="lang lang-sw hidden"><strong>Kiswahili — Muhtasari</strong><p>Ratiba ni nyongeza za Katiba ambazo zinaorodhesha maelezo yanayohitajika kutekeleza sura kuu—kama fomu za kiapo, sheria za mpito, na maelezo ya uchaguzi. Fikiria ratiba kama nyongeza ya kitabu: si kwa kusoma kwa haraka, lakini muhimu kwa watendaji na walimu wanaotekeleza sheria.</p></div>
-      <p class="links">Official PDF: <a target="_blank" rel="noopener noreferrer" href="https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf">Open PDF</a> · Chapter view: <a target="_blank" rel="noopener noreferrer" href="https://www.constituteproject.org/constitution/Kenya_2010#schedules">Open chapter on Constitute</a></p>
-    </article>
-    
-      </div>
-    </section>
-
-    <section id="quiz" class="section">
-      <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>Quick Quiz</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Mtihani Mfupi</h2>
-      <div id="quizCard" class="quiz-card">
-        <p id="question">Question will appear here.</p>
-        <div id="answers"></div>
-        <div id="quizResult" class="result" aria-live="polite"></div>
-        <div class="quiz-controls">
-          <button id="nextBtn" onclick="nextQuestion()">Next</button>
-          <button id="restartBtn" onclick="startQuiz()" class="hidden">Restart</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="glossary" class="section">
-      <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>Glossary</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Kamusi</h2>
-      <dl>
-        <dt data-en>Constitution</dt><dd data-en>The country's highest law.</dd>
-        <dt data-sw class="hidden">Katiba</dt><dd data-sw class="hidden">Sheria kuu ya nchi.</dd>
-      </dl>
-    </section>
-
-    <section id="about" class="section">
-      <button class="back" onclick="openSection('home')">← <span data-en>Back</span><span data-sw class="hidden">Rudi</span></button>
-      <h2 tabindex="-1" data-en>About</h2>
-      <h2 tabindex="-1" data-sw class="hidden">Kuhusu</h2>
-      <p data-en>This app simplifies and explains the Constitution. It includes links to the official document and chapter-level anchors for deeper reading.</p>
-      <p data-sw class="hidden">App hii inafupisha na kuelezea Katiba. Inajumuisha viungo kwa hati rasmi na viungo vya sura kwa usomaji wa undani.</p>
-      <p class="credits">Powered by DRACO DYNASTY · Kenya</p>
-    </section>
+        <div id="relatedLaws" class="related"></div>
+        <p id="realityNote" class="note"></p>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <small><a href="{parliament_pdf}" target="_blank" rel="noopener noreferrer">Official Constitution (Parliament of Kenya)</a> · <a href="{constitute_url}" target="_blank" rel="noopener noreferrer">Constitute Project (chapter anchors)</a></small>
+    <small>Sources: Parliament of Kenya Constitution PDF and Constitute Project for chapter anchors.</small>
   </footer>
 
   <script src="script.js"></script>
