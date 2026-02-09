@@ -110,6 +110,7 @@ const glossaryList = document.getElementById("glossaryList");
 const glossarySearch = document.getElementById("glossarySearch");
 const jsonStructure = document.getElementById("jsonStructure");
 const backToTop = document.getElementById("backToTop");
+const themeToggle = document.getElementById("themeToggle");
 
 const linkTargets = [
   "officialPdfLink",
@@ -183,7 +184,7 @@ function renderToc() {
 
     const link = createElement(
       "a",
-      "block rounded-xl border border-transparent px-3 py-2 text-slate-700 hover:border-slate-200 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-kenya-red/30"
+      "block rounded-xl border border-transparent px-3 py-2 text-slate-700 hover:border-slate-200 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-kenya-red/30 dark:text-slate-200 dark:hover:border-slate-700 dark:hover:bg-slate-800"
     );
     link.href = `#${section.id}`;
     link.textContent = label;
@@ -215,7 +216,7 @@ function buildEntrySearchText(entry, section) {
 function createEntryCard(entry, section) {
   const articleEl = createElement(
     "article",
-    "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4"
+    "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4 dark:border-slate-700 dark:bg-slate-900/60"
   );
   const label = section.type === "chapter" ? `Article ${entry.number}` : entry.number;
   articleEl.id = `${section.id}-${slugify(label)}`;
@@ -223,12 +224,12 @@ function createEntryCard(entry, section) {
   const header = createElement("div");
   const labelEl = createElement(
     "p",
-    "text-xs uppercase tracking-[0.2em] text-slate-500",
+    "text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400",
     label
   );
   const titleEl = createElement(
     "h4",
-    "mt-1 text-lg font-semibold text-slate-900",
+    "mt-1 text-lg font-semibold text-slate-900 dark:text-white",
     entry.title
   );
   header.appendChild(labelEl);
@@ -237,12 +238,12 @@ function createEntryCard(entry, section) {
   const originalWrap = createElement("div");
   const originalLabel = createElement(
     "p",
-    "text-sm font-semibold text-slate-700",
+    "text-sm font-semibold text-slate-700 dark:text-slate-300",
     "Original Text"
   );
   const originalText = createElement(
     "p",
-    "mt-2 whitespace-pre-line font-serif text-base leading-relaxed text-slate-900",
+    "mt-2 whitespace-pre-line font-serif text-base leading-relaxed text-slate-900 dark:text-slate-100",
     entry.formalText
   );
   originalWrap.appendChild(originalLabel);
@@ -250,16 +251,16 @@ function createEntryCard(entry, section) {
 
   const plainWrap = createElement(
     "div",
-    "rounded-xl border-l-4 border-kenya-green bg-kenya-green/10 p-4"
+    "rounded-xl border-l-4 border-kenya-green bg-kenya-green/10 p-4 dark:bg-kenya-green/15"
   );
   const plainLabel = createElement(
     "p",
-    "text-sm font-semibold text-kenya-green",
+    "text-sm font-semibold text-kenya-green dark:text-kenya-green/90",
     "Plain English"
   );
   const plainText = createElement(
     "p",
-    "mt-2 whitespace-pre-line text-base leading-relaxed text-slate-800",
+    "mt-2 whitespace-pre-line text-base leading-relaxed text-slate-800 dark:text-slate-100",
     entry.plainText
   );
   plainWrap.appendChild(plainLabel);
@@ -267,16 +268,16 @@ function createEntryCard(entry, section) {
 
   const kiswahiliWrap = createElement(
     "div",
-    "rounded-xl border-l-4 border-kenya-red bg-kenya-red/10 p-4"
+    "rounded-xl border-l-4 border-kenya-red bg-kenya-red/10 p-4 dark:bg-kenya-red/15"
   );
   const kiswahiliLabel = createElement(
     "p",
-    "text-sm font-semibold text-kenya-red",
+    "text-sm font-semibold text-kenya-red dark:text-kenya-red/90",
     "Kiswahili"
   );
   const kiswahiliText = createElement(
     "p",
-    "mt-2 whitespace-pre-line text-base leading-relaxed text-slate-800",
+    "mt-2 whitespace-pre-line text-base leading-relaxed text-slate-800 dark:text-slate-100",
     entry.plainTextSw || "Ongeza maelezo rahisi ya Kiswahili hapa."
   );
   kiswahiliWrap.appendChild(kiswahiliLabel);
@@ -301,16 +302,16 @@ function renderSections() {
 
     const headingWrap = createElement(
       "div",
-      "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+    "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/60"
     );
     const headingLabel = createElement(
       "p",
-      "text-xs uppercase tracking-[0.2em] text-slate-500",
+    "text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400",
       sectionLabel(section)
     );
     const headingTitle = createElement(
       "h3",
-      "mt-1 text-xl font-semibold text-slate-900",
+    "mt-1 text-xl font-semibold text-slate-900 dark:text-white",
       section.title
     );
     headingWrap.appendChild(headingLabel);
@@ -322,7 +323,7 @@ function renderSections() {
     if (!section.entries || section.entries.length === 0) {
       const placeholder = createElement(
         "div",
-        "rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-600"
+        "rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-900/30 dark:text-slate-300"
       );
       placeholder.textContent =
         "Content could not be loaded. Please check content.json or refresh the page.";
@@ -390,26 +391,76 @@ function applySearch() {
 function renderGlossary() {
   if (!glossaryList) return;
   glossaryList.innerHTML = "";
-  glossary.forEach((item) => {
-    const card = createElement(
-      "div",
-      "rounded-xl border border-slate-200 bg-slate-50 p-3"
-    );
-    card.dataset.term = `${item.term} ${item.definition}`.toLowerCase();
-    const term = createElement("h3", "text-sm font-semibold text-slate-900", item.term);
-    const definition = createElement("p", "mt-1 text-sm text-slate-600", item.definition);
-    card.appendChild(term);
-    card.appendChild(definition);
-    glossaryList.appendChild(card);
-  });
+  const sorted = [...glossary].sort((a, b) => a.term.localeCompare(b.term));
+  const groups = sorted.reduce((acc, item) => {
+    const letter = item.term.charAt(0).toUpperCase() || "#";
+    if (!acc[letter]) acc[letter] = [];
+    acc[letter].push(item);
+    return acc;
+  }, {});
+
+  Object.keys(groups)
+    .sort()
+    .forEach((letter) => {
+      const groupWrap = createElement(
+        "div",
+        "glossary-group rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/40"
+      );
+      const header = createElement(
+        "div",
+        "flex items-center justify-between"
+      );
+      const badge = createElement(
+        "span",
+        "text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400",
+        letter
+      );
+      header.appendChild(badge);
+
+      const list = createElement(
+        "dl",
+        "mt-3 divide-y divide-slate-200 text-sm dark:divide-slate-700"
+      );
+
+      groups[letter].forEach((item) => {
+        const row = createElement(
+          "div",
+          "glossary-entry grid gap-2 py-3 sm:grid-cols-[160px_minmax(0,1fr)]"
+        );
+        row.dataset.term = `${item.term} ${item.definition}`.toLowerCase();
+        const term = createElement(
+          "dt",
+          "font-semibold text-slate-900 dark:text-white",
+          item.term
+        );
+        const definition = createElement(
+          "dd",
+          "text-slate-600 dark:text-slate-300",
+          item.definition
+        );
+        row.appendChild(term);
+        row.appendChild(definition);
+        list.appendChild(row);
+      });
+
+      groupWrap.appendChild(header);
+      groupWrap.appendChild(list);
+      glossaryList.appendChild(groupWrap);
+    });
 }
 
 function applyGlossarySearch() {
   const query = (glossarySearch?.value || "").trim().toLowerCase();
-  const items = glossaryList?.children || [];
-  Array.from(items).forEach((item) => {
-    const matches = !query || item.dataset.term.includes(query);
-    item.classList.toggle("hidden", !matches);
+  const entries = glossaryList?.querySelectorAll(".glossary-entry") || [];
+  entries.forEach((entry) => {
+    const matches = !query || entry.dataset.term.includes(query);
+    entry.classList.toggle("hidden", !matches);
+  });
+
+  const groups = glossaryList?.querySelectorAll(".glossary-group") || [];
+  groups.forEach((group) => {
+    const visible = group.querySelectorAll(".glossary-entry:not(.hidden)").length > 0;
+    group.classList.toggle("hidden", !visible);
   });
 }
 
@@ -426,6 +477,23 @@ function renderJsonTemplate() {
   if (jsonStructure) {
     jsonStructure.textContent = JSON.stringify(jsonTemplate, null, 2);
   }
+}
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.documentElement.classList.toggle("dark", isDark);
+  if (themeToggle) {
+    themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+  }
+}
+
+function initializeTheme() {
+  const stored = localStorage.getItem("theme");
+  const prefersDark =
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = stored || (prefersDark ? "dark" : "light");
+  applyTheme(theme);
 }
 
 function initializeContent(data) {
@@ -472,6 +540,14 @@ function attachListeners() {
   if (glossarySearch) {
     glossarySearch.addEventListener("input", applyGlossarySearch);
   }
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      const nextTheme = isDark ? "light" : "dark";
+      localStorage.setItem("theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+  }
   if (backToTop) {
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -483,5 +559,6 @@ function attachListeners() {
   }
 }
 
+initializeTheme();
 attachListeners();
 loadContent();

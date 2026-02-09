@@ -8,6 +8,7 @@
   <link rel="manifest" href="manifest.json" />
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
@@ -23,21 +24,22 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased">
+<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="bg-white border-b border-slate-200">
+  <header class="bg-white border-b border-slate-200 dark:bg-slate-900 dark:border-slate-700">
     <div class="max-w-6xl mx-auto px-4 py-6">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Layman's Guide</p>
-          <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">The Constitution of Kenya (2010)</h1>
-          <p class="mt-2 text-sm text-slate-600">Original text paired with plain-English explanations for every article.</p>
+          <p class="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Layman's Guide</p>
+          <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">The Constitution of Kenya (2010)</h1>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Original text paired with plain-English explanations for every article.</p>
         </div>
         <div class="flex flex-wrap items-center gap-3 text-sm">
-          <a id="officialPdfLink" class="rounded-full border border-kenya-red/30 px-3 py-1.5 text-kenya-red hover:bg-kenya-red/10" href="#" target="_blank" rel="noopener noreferrer">Official PDF</a>
-          <a id="constituteLink" class="rounded-full border border-kenya-green/30 px-3 py-1.5 text-kenya-green hover:bg-kenya-green/10" href="#" target="_blank" rel="noopener noreferrer">Constitute Project</a>
-          <a href="#glossary" class="rounded-full border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-100">Glossary</a>
+          <a id="officialPdfLink" class="rounded-full border border-kenya-red/30 px-3 py-1.5 text-kenya-red hover:bg-kenya-red/10 dark:border-kenya-red/50 dark:text-kenya-red/90 dark:hover:bg-kenya-red/20" href="#" target="_blank" rel="noopener noreferrer">Official PDF</a>
+          <a id="constituteLink" class="rounded-full border border-kenya-green/30 px-3 py-1.5 text-kenya-green hover:bg-kenya-green/10 dark:border-kenya-green/50 dark:text-kenya-green/90 dark:hover:bg-kenya-green/20" href="#" target="_blank" rel="noopener noreferrer">Constitute Project</a>
+          <a href="#glossary" class="rounded-full border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Glossary</a>
+          <button id="themeToggle" type="button" class="rounded-full border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" aria-pressed="false">Dark mode</button>
         </div>
       </div>
     </div>
@@ -45,27 +47,27 @@
   </header>
 
   <main id="content" class="max-w-6xl mx-auto px-4 py-6 space-y-6">
-    <section class="rounded-2xl bg-white shadow-sm border border-slate-200 p-5">
+    <section class="rounded-2xl bg-white shadow-sm border border-slate-200 p-5 dark:bg-slate-900/60 dark:border-slate-700">
       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 class="text-lg font-semibold text-slate-900">Search the Constitution</h2>
-          <p class="text-sm text-slate-600">Search by article number or keywords like "Land", "Arrest", or "Devolution".</p>
+          <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Search the Constitution</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Search by article number or keywords like "Land", "Arrest", or "Devolution".</p>
         </div>
-        <button id="clearSearch" class="text-sm font-semibold text-slate-600 hover:text-slate-900">Clear</button>
+        <button id="clearSearch" class="text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Clear</button>
       </div>
       <div class="mt-4">
-        <label class="text-sm font-medium text-slate-700" for="searchInput">Search articles</label>
-        <input id="searchInput" type="search" placeholder="e.g. Article 43, land, arrest" class="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base focus:border-kenya-green focus:outline-none focus:ring-2 focus:ring-kenya-green/20" />
-        <p id="searchMeta" class="mt-2 text-xs text-slate-500" role="status" aria-live="polite"></p>
+        <label class="text-sm font-medium text-slate-700 dark:text-slate-200" for="searchInput">Search articles</label>
+        <input id="searchInput" type="search" placeholder="e.g. Article 43, land, arrest" class="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-kenya-green focus:outline-none focus:ring-2 focus:ring-kenya-green/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500" />
+        <p id="searchMeta" class="mt-2 text-xs text-slate-500 dark:text-slate-400" role="status" aria-live="polite"></p>
       </div>
     </section>
 
     <div class="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
       <aside class="space-y-4 lg:sticky lg:top-24 self-start h-fit">
-        <section class="toc-panel rounded-2xl bg-white shadow-sm border border-slate-200 p-4">
-          <h2 class="text-base font-semibold text-slate-900">Table of Contents</h2>
-          <p class="text-xs text-slate-500">Chapters 1-18 and Schedules.</p>
-          <input id="tocSearch" type="search" placeholder="Filter chapters..." class="mt-3 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-kenya-red focus:outline-none focus:ring-2 focus:ring-kenya-red/20" />
+        <section class="toc-panel rounded-2xl bg-white shadow-sm border border-slate-200 p-4 dark:bg-slate-900/60 dark:border-slate-700">
+          <h2 class="text-base font-semibold text-slate-900 dark:text-white">Table of Contents</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Chapters 1-18 and Schedules.</p>
+          <input id="tocSearch" type="search" placeholder="Filter chapters..." class="mt-3 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-kenya-red focus:outline-none focus:ring-2 focus:ring-kenya-red/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500" />
           <div class="toc-scroll mt-4">
             <ul id="tocList" class="space-y-2 text-sm"></ul>
           </div>
@@ -75,25 +77,25 @@
       <section id="chaptersContainer" class="space-y-6"></section>
     </div>
 
-    <section id="glossary" class="rounded-2xl bg-white shadow-sm border border-slate-200 p-5">
+    <section id="glossary" class="rounded-2xl bg-white shadow-sm border border-slate-200 p-5 dark:bg-slate-900/60 dark:border-slate-700">
       <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 class="text-lg font-semibold text-slate-900">Glossary</h2>
-          <p class="text-sm text-slate-600">Common legal terms used throughout the Constitution.</p>
+          <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Glossary</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Common legal terms used throughout the Constitution.</p>
         </div>
-        <input id="glossarySearch" type="search" placeholder="Search glossary terms..." class="w-full sm:w-60 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-kenya-green focus:outline-none focus:ring-2 focus:ring-kenya-green/20" />
+        <input id="glossarySearch" type="search" placeholder="Search glossary terms..." class="w-full sm:w-60 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-kenya-green focus:outline-none focus:ring-2 focus:ring-kenya-green/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500" />
       </div>
-      <div id="glossaryList" class="mt-4 grid gap-3 sm:grid-cols-2"></div>
+      <div id="glossaryList" class="mt-4 space-y-4"></div>
     </section>
   </main>
 
-  <footer class="border-t border-slate-200 bg-white">
-    <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-600">
+  <footer class="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-600 dark:text-slate-300">
       <p>
         Sources:
-        <a id="officialPdfFooter" class="text-kenya-red hover:underline" href="#" target="_blank" rel="noopener noreferrer">Official Constitution (Parliament of Kenya)</a>
+        <a id="officialPdfFooter" class="text-kenya-red hover:underline dark:text-kenya-red/90" href="#" target="_blank" rel="noopener noreferrer">Official Constitution (Parliament of Kenya)</a>
         |
-        <a id="constituteFooter" class="text-kenya-green hover:underline" href="#" target="_blank" rel="noopener noreferrer">Constitute Project</a>
+        <a id="constituteFooter" class="text-kenya-green hover:underline dark:text-kenya-green/90" href="#" target="_blank" rel="noopener noreferrer">Constitute Project</a>
       </p>
       <p class="mt-2">Built for mobile-first learning with plain-English explanations.</p>
     </div>
@@ -102,7 +104,7 @@
   <button
     id="backToTop"
     type="button"
-    class="hidden fixed bottom-5 right-5 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-kenya-green/40"
+    class="hidden fixed bottom-5 right-5 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-kenya-green/40 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
     aria-label="Back to top"
   >
     Back to top
