@@ -654,6 +654,7 @@ function renderJsonTemplate() {
 function applyTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.classList.toggle("dark", isDark);
+  document.documentElement.dataset.theme = theme;
   if (document.body) {
     document.body.classList.toggle("dark", isDark);
     document.body.dataset.theme = theme;
