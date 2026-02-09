@@ -12,7 +12,7 @@ A lightweight, mobile-first single-page app that pairs the **original, unedited 
 
 ## Content JSON Structure
 
-All content lives in `script.js`. Replace the placeholder text with the official Constitution text and your plain-English explanations.
+All content lives in `content.json` and is loaded by `script.js`. The file currently contains the full Constitution text sourced from the Constitute Project, plus a plain-English explanation field after every article. Update the `plainText` fields to refine or expand the explanations.
 
 ```json
 {
@@ -41,15 +41,16 @@ All content lives in `script.js`. Replace the placeholder text with the official
   ],
   "schedules": [
     {
-      "id": "schedules",
-      "title": "Schedules",
+      "id": "schedule-1",
+      "number": 1,
+      "title": "FIRST SCHEDULE. COUNTIES (Article 6 (1))",
       "entries": [
         {
           "number": "Schedule 1",
-          "title": "Oaths and affirmations",
+          "title": "Counties (Article 6 (1))",
           "formalText": "Full schedule text goes here.",
           "plainText": "Simple explanation goes here.",
-          "keywords": ["oath", "affirmation"]
+          "keywords": ["counties", "schedule"]
         }
       ]
     }
@@ -65,4 +66,4 @@ All content lives in `script.js`. Replace the placeholder text with the official
 
 ## Local Development
 
-This project is static. Open `index.html` in a browser or serve the folder via any static server.
+This project is static. Because it loads `content.json`, serve the folder with any static server (e.g., `python3 -m http.server`) and open the provided URL in a browser.

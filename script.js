@@ -1,97 +1,9 @@
-const constitutionSources = {
+const defaultSources = {
   officialPdf: "https://www.parliament.go.ke/sites/default/files/2017-05/The_Constitution_of_Kenya_2010.pdf",
   constituteProject: "https://www.constituteproject.org/constitution/Kenya_2010"
 };
 
-const chapterTitles = [
-  "Sovereignty of the People",
-  "The Republic",
-  "Citizenship",
-  "The Bill of Rights",
-  "Land and Environment",
-  "Leadership and Integrity",
-  "Representation of the People",
-  "The Legislature",
-  "The Executive",
-  "The Judiciary",
-  "Devolved Government",
-  "Public Finance",
-  "The Public Service",
-  "National Security",
-  "Commissions and Independent Offices",
-  "Amendment of this Constitution",
-  "General Provisions",
-  "Transitional and Consequential Provisions"
-];
-
-const chapters = chapterTitles.map((title, index) => ({
-  id: `chapter-${index + 1}`,
-  number: index + 1,
-  title,
-  articles: []
-}));
-
-chapters[0].articles = [
-  {
-    number: 1,
-    title: "Sovereignty of the people",
-    formalText: "Add the official text of Article 1 here.",
-    plainText: "Explain that all authority in Kenya comes from the people, who exercise it directly or through elected leaders.",
-    keywords: ["sovereignty", "people", "authority"]
-  },
-  {
-    number: 2,
-    title: "Supremacy of this Constitution",
-    formalText: "Add the official text of Article 2 here.",
-    plainText: "Clarify that the Constitution is the highest law and any conflicting law is invalid.",
-    keywords: ["supremacy", "constitution", "law"]
-  }
-];
-
-chapters[3].articles = [
-  {
-    number: 19,
-    title: "Rights and fundamental freedoms",
-    formalText: "Add the official text of Article 19 here.",
-    plainText: "Explain that the Bill of Rights protects every person's dignity, equality, and freedom.",
-    keywords: ["rights", "freedom", "dignity", "equality"]
-  },
-  {
-    number: 43,
-    title: "Economic and social rights",
-    formalText: "Add the official text of Article 43 here.",
-    plainText: "Describe the rights to health, housing, food, water, social security, and education.",
-    keywords: ["health", "housing", "education", "social", "water"]
-  }
-];
-
-chapters[10].articles = [
-  {
-    number: 174,
-    title: "Objects of devolution",
-    formalText: "Add the official text of Article 174 here.",
-    plainText: "Summarize how devolution brings services closer and improves participation and accountability.",
-    keywords: ["devolution", "counties", "services", "participation"]
-  }
-];
-
-const schedules = [
-  {
-    id: "schedules",
-    title: "Schedules",
-    entries: [
-      {
-        number: "Schedule 1",
-        title: "Oaths and affirmations",
-        formalText: "Add the official text of Schedule 1 here.",
-        plainText: "Explain that this schedule contains official oath wording used by public officials.",
-        keywords: ["oath", "affirmation", "officials"]
-      }
-    ]
-  }
-];
-
-const glossary = [
+const defaultGlossary = [
   {
     term: "Gazette",
     definition: "The official government publication where laws, notices, and appointments are announced."
@@ -115,6 +27,14 @@ const glossary = [
   {
     term: "Immunity",
     definition: "Legal protection that prevents someone from being sued or prosecuted in specific situations."
+  },
+  {
+    term: "Quasi-judicial",
+    definition: "Having powers similar to a court, such as holding hearings and making decisions."
+  },
+  {
+    term: "Statute",
+    definition: "A written law passed by a legislature."
   }
 ];
 
@@ -122,8 +42,8 @@ const jsonTemplate = {
   meta: {
     title: "Constitution of Kenya (2010)",
     sources: {
-      officialPdf: constitutionSources.officialPdf,
-      constituteProject: constitutionSources.constituteProject
+      officialPdf: defaultSources.officialPdf,
+      constituteProject: defaultSources.constituteProject
     }
   },
   chapters: [
@@ -165,19 +85,19 @@ const jsonTemplate = {
   ]
 };
 
-const sections = [
-  ...chapters.map((chapter) => ({
-    ...chapter,
-    type: "chapter",
-    entries: chapter.articles
-  })),
-  ...schedules.map((schedule) => ({
-    ...schedule,
-    type: "schedule",
-    numberLabel: "Schedules",
-    entries: schedule.entries
-  }))
-];
+const fallbackContent = {
+  meta: {
+    title: "Constitution of Kenya (2010)",
+    sources: defaultSources
+  },
+  chapters: [],
+  schedules: [],
+  glossary: defaultGlossary
+};
+
+let constitutionSources = { ...defaultSources };
+let sections = [];
+let glossary = defaultGlossary;
 
 const tocList = document.getElementById("tocList");
 const tocSearch = document.getElementById("tocSearch");
@@ -213,7 +133,27 @@ function slugify(text) {
 }
 
 function sectionLabel(section) {
-  return section.type === "chapter" ? `Chapter ${section.number}` : section.numberLabel || "Schedules";
+  if (section.type === "chapter") {
+    return `Chapter ${section.number}`;
+  }
+  if (section.number) {
+    return `Schedule ${section.number}`;
+  }
+  return "Schedules";
+}
+
+function buildSections(data) {
+  const chapterList = (data?.chapters || []).map((chapter) => ({
+    ...chapter,
+    type: "chapter",
+    entries: chapter.articles || []
+  }));
+  const scheduleList = (data?.schedules || []).map((schedule) => ({
+    ...schedule,
+    type: "schedule",
+    entries: schedule.entries || []
+  }));
+  return [...chapterList, ...scheduleList];
 }
 
 function setSourceLinks() {
@@ -299,7 +239,7 @@ function createEntryCard(entry, section) {
   );
   const originalText = createElement(
     "p",
-    "mt-2 font-serif text-base leading-relaxed text-slate-900",
+    "mt-2 whitespace-pre-line font-serif text-base leading-relaxed text-slate-900",
     entry.formalText
   );
   originalWrap.appendChild(originalLabel);
@@ -316,7 +256,7 @@ function createEntryCard(entry, section) {
   );
   const plainText = createElement(
     "p",
-    "mt-2 text-base leading-relaxed text-slate-800",
+    "mt-2 whitespace-pre-line text-base leading-relaxed text-slate-800",
     entry.plainText
   );
   plainWrap.appendChild(plainLabel);
@@ -364,7 +304,7 @@ function renderSections() {
         "rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-600"
       );
       placeholder.textContent =
-        "Content coming soon. Add articles for this chapter using the JSON structure in script.js.";
+        "Content could not be loaded. Please check content.json or refresh the page.";
       sectionEl.appendChild(placeholder);
     } else {
       section.entries.forEach((entry) => {
@@ -383,13 +323,13 @@ function renderSections() {
 function updateSearchMeta(matching, total, query) {
   if (!searchMeta) return;
   if (!query) {
-    searchMeta.textContent = `Showing all ${total} articles.`;
+    searchMeta.textContent = `Showing all ${total} entries.`;
     return;
   }
   const message =
     matching === 0
-      ? "No articles match that search yet."
-      : `Showing ${matching} of ${total} articles.`;
+      ? "No entries match that search yet."
+      : `Showing ${matching} of ${total} entries.`;
   searchMeta.textContent = message;
 }
 
@@ -467,6 +407,34 @@ function renderJsonTemplate() {
   }
 }
 
+function initializeContent(data) {
+  const meta = data?.meta || {};
+  constitutionSources = { ...defaultSources, ...(meta.sources || {}) };
+  glossary = data?.glossary?.length ? data.glossary : defaultGlossary;
+  sections = buildSections(data);
+
+  setSourceLinks();
+  renderToc();
+  renderSections();
+  renderGlossary();
+  renderJsonTemplate();
+  applySearch();
+}
+
+async function loadContent() {
+  try {
+    const response = await fetch("content.json");
+    if (!response.ok) {
+      throw new Error(`Failed to load content.json (status ${response.status}).`);
+    }
+    const data = await response.json();
+    initializeContent(data);
+  } catch (error) {
+    console.error("Unable to load content.json", error);
+    initializeContent(fallbackContent);
+  }
+}
+
 function attachListeners() {
   if (searchInput) {
     searchInput.addEventListener("input", applySearch);
@@ -485,10 +453,5 @@ function attachListeners() {
   }
 }
 
-setSourceLinks();
-renderToc();
-renderSections();
-renderGlossary();
-renderJsonTemplate();
 attachListeners();
-applySearch();
+loadContent();
