@@ -7,6 +7,20 @@
   <meta name="description" content="Read the original Constitution of Kenya with plain-English explanations, a searchable table of contents, and a glossary." />
   <link rel="manifest" href="manifest.json" />
   <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = stored || (prefersDark ? "dark" : "light");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (error) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
+  <script>
     tailwind.config = {
       darkMode: "class",
       theme: {
@@ -95,14 +109,17 @@
     </div>
 
     <section id="glossary" class="rounded-2xl bg-white shadow-sm border border-slate-200 p-5 dark:bg-slate-900/60 dark:border-slate-700">
-      <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Glossary</h2>
           <p class="text-sm text-slate-600 dark:text-slate-300">Common legal terms used throughout the Constitution.</p>
         </div>
-        <input id="glossarySearch" type="search" placeholder="Search glossary terms..." class="w-full sm:w-60 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-kenya-green focus:outline-none focus:ring-2 focus:ring-kenya-green/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500" />
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+          <input id="glossarySearch" type="search" placeholder="Search glossary terms..." class="w-full sm:w-60 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-kenya-green focus:outline-none focus:ring-2 focus:ring-kenya-green/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500" />
+          <button id="glossaryToggle" type="button" class="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" aria-expanded="false">Expand</button>
+        </div>
       </div>
-      <div id="glossaryList" class="mt-4 space-y-4"></div>
+      <div id="glossaryList" class="glossary-window mt-4 space-y-4"></div>
     </section>
   </main>
 

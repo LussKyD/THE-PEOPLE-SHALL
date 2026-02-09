@@ -143,6 +143,66 @@ const defaultGlossary = [
   {
     term: "Whistleblower",
     definition: "A person who reports wrongdoing within an organization."
+  },
+  {
+    term: "Adjournment",
+    definition: "A temporary pause or suspension of a meeting or court session."
+  },
+  {
+    term: "Appropriation",
+    definition: "Authorization by Parliament to allocate public funds for a purpose."
+  },
+  {
+    term: "Audit",
+    definition: "An official examination of accounts or financial records."
+  },
+  {
+    term: "Bicameral",
+    definition: "Having two legislative chambers, such as the National Assembly and Senate."
+  },
+  {
+    term: "Censure",
+    definition: "A formal statement of disapproval by a legislative body."
+  },
+  {
+    term: "Coalition",
+    definition: "An alliance of political parties formed to govern or pursue a goal."
+  },
+  {
+    term: "Commission",
+    definition: "An independent body established to oversee a public function."
+  },
+  {
+    term: "County Assembly",
+    definition: "The legislative body of a county government."
+  },
+  {
+    term: "County Executive Committee",
+    definition: "The executive team that assists the county governor in administration."
+  },
+  {
+    term: "Fiscal year",
+    definition: "A twelve-month period used for budgeting and accounting."
+  },
+  {
+    term: "Indemnity",
+    definition: "Protection against legal liability or loss."
+  },
+  {
+    term: "Judicial review",
+    definition: "Court supervision of the legality of government actions."
+  },
+  {
+    term: "Public participation",
+    definition: "Involving citizens in decision-making, as required by the Constitution."
+  },
+  {
+    term: "Standing orders",
+    definition: "Rules that govern how a legislative house conducts its business."
+  },
+  {
+    term: "Summons",
+    definition: "An official order requiring someone to appear or produce documents."
   }
 ];
 
@@ -222,6 +282,7 @@ const themeToggle = document.getElementById("themeToggle");
 const themeToggleLabel = document.getElementById("themeToggleLabel");
 const themeIconSun = document.getElementById("themeIconSun");
 const themeIconMoon = document.getElementById("themeIconMoon");
+const glossaryToggle = document.getElementById("glossaryToggle");
 
 const linkTargets = [
   "officialPdfLink",
@@ -593,6 +654,10 @@ function renderJsonTemplate() {
 function applyTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.classList.toggle("dark", isDark);
+  if (document.body) {
+    document.body.classList.toggle("dark", isDark);
+    document.body.dataset.theme = theme;
+  }
   if (themeToggle) {
     themeToggle.setAttribute("aria-pressed", String(isDark));
   }
@@ -608,7 +673,12 @@ function applyTheme(theme) {
 }
 
 function initializeTheme() {
-  const stored = localStorage.getItem("theme");
+  let stored = null;
+  try {
+    stored = localStorage.getItem("theme");
+  } catch (error) {
+    stored = null;
+  }
   const prefersDark =
     window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   const theme = stored || (prefersDark ? "dark" : "light");
@@ -617,7 +687,13 @@ function initializeTheme() {
   if (!stored && window.matchMedia) {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = (event) => {
-      if (!localStorage.getItem("theme")) {
+      let current = null;
+      try {
+        current = localStorage.getItem("theme");
+      } catch (error) {
+        current = null;
+      }
+      if (!current) {
         applyTheme(event.matches ? "dark" : "light");
       }
     };
@@ -673,11 +749,22 @@ function attachListeners() {
   if (glossarySearch) {
     glossarySearch.addEventListener("input", applyGlossarySearch);
   }
+  if (glossaryToggle && glossaryList) {
+    glossaryToggle.addEventListener("click", () => {
+      const isExpanded = glossaryList.classList.toggle("is-expanded");
+      glossaryToggle.textContent = isExpanded ? "Collapse" : "Expand";
+      glossaryToggle.setAttribute("aria-expanded", String(isExpanded));
+    });
+  }
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
       const isDark = document.documentElement.classList.contains("dark");
       const nextTheme = isDark ? "light" : "dark";
-      localStorage.setItem("theme", nextTheme);
+      try {
+        localStorage.setItem("theme", nextTheme);
+      } catch (error) {
+        // Ignore storage errors in restricted contexts.
+      }
       applyTheme(nextTheme);
     });
   }
