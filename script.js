@@ -457,7 +457,7 @@ function attachListeners() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
     window.addEventListener("scroll", () => {
-      const shouldShow = window.scrollY > 400;
+      const shouldShow = window.scrollY > 20;
       backToTop.classList.toggle("hidden", !shouldShow);
     });
   }
