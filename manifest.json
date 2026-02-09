@@ -1,10 +1,10 @@
 {
-  "name": "The People Shall",
-  "short_name": "PeopleShall",
+  "name": "Layman's Guide to the Kenyan Constitution",
+  "short_name": "Kenya Constitution",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#0066cc",
+  "theme_color": "#006600",
   "icons": [
     {
       "src": "icons/icon-192.svg",

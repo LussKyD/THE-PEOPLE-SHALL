@@ -1,30 +1,41 @@
- :root{--bg:#fff;--card:#f7f9fc;--accent:#0066cc;--text:#111}
-*{box-sizing:border-box}body{font-family:system-ui, -apple-system, "Segoe UI", Roboto, Arial;margin:0;color:var(--text);background:var(--bg);line-height:1.45}
-#splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#f3f6fb);z-index:60;transition:opacity .6s ease}
-.flag-wrap{width:220px;height:140px;overflow:hidden;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center}
-.flag{width:200px;height:120px;background:linear-gradient(#006600,#006600);position:relative;transform-origin:center;animation:wave 3s ease-in-out infinite}
-.flag:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#cf1124 0 33%, #000 33% 66%, #fff 66%);opacity:.95}
-@keyframes wave{0%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(1deg) translateY(-3px)}100%{transform:rotate(-1deg) translateY(0)}}
-.splash-text h1{font-size:1.6rem;margin:12px 0 4px;color:#073763}
-.splash-text .tag{margin:0;color:#333}
-.site-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:transparent;color:#fff;position:sticky;top:0;z-index:50}
-.title{display:flex;flex-direction:column}
-.logo-text{font-weight:700;color:#073763}
-.underline-flag{display:block;height:6px;width:140px;background:linear-gradient(90deg,#cf1124,#fff,#000);border-radius:6px;margin-top:6px}
-.header-controls{display:flex;gap:8px;align-items:center}
-#menu{display:flex;flex-direction:column;padding:8px 16px;gap:8px;background:#fff;border-bottom:1px solid #eee}
-#menu a{color:var(--accent);text-decoration:none;font-weight:600}
-.hidden{display:none}
-main{padding:12px;margin-top:12px}
-.section{display:none}
-.section.active{display:block}
-.card-row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-.card{flex:1 1 140px;background:var(--card);padding:12px;border-radius:10px;cursor:pointer;box-shadow:0 2px 6px rgba(15,15,15,0.06)}
-.reader{padding-bottom:48px}
-.reader-controls{display:flex;gap:8px;align-items:center;margin:8px 0}
-.reader .official{margin-left:auto;background:transparent;border:1px solid #ddd;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--accent)}
-.chapter{background:#fff;padding:14px;border-radius:10px;margin:12px 0;box-shadow:0 1px 6px rgba(0,0,0,0.04)}
-.chapter h3{margin:0 0 8px}
-.credits{margin-top:12px;color:#666;font-size:0.9rem}
-.site-footer{padding:12px;text-align:center;color:#666;border-top:1px solid #eee;margin-top:12px}
-@media (max-width:520px){.card-row{flex-direction:column}.reader-controls{flex-direction:column;align-items:flex-start}}
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 16px;
+  background: #111;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 16px;
+  z-index: 100;
+}
+
+.flag-stripe {
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    #111 0 20%,
+    #fff 20% 24%,
+    #bf1e2e 24% 48%,
+    #fff 48% 52%,
+    #006600 52% 100%
+  );
+}
