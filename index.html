@@ -39,7 +39,24 @@
           <a id="officialPdfLink" class="rounded-full border border-kenya-red/30 px-3 py-1.5 text-kenya-red hover:bg-kenya-red/10 dark:border-kenya-red/50 dark:text-kenya-red/90 dark:hover:bg-kenya-red/20" href="#" target="_blank" rel="noopener noreferrer">Official PDF</a>
           <a id="constituteLink" class="rounded-full border border-kenya-green/30 px-3 py-1.5 text-kenya-green hover:bg-kenya-green/10 dark:border-kenya-green/50 dark:text-kenya-green/90 dark:hover:bg-kenya-green/20" href="#" target="_blank" rel="noopener noreferrer">Constitute Project</a>
           <a href="#glossary" class="rounded-full border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Glossary</a>
-          <button id="themeToggle" type="button" class="rounded-full border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" aria-pressed="false">Dark mode</button>
+          <button id="themeToggle" type="button" class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" aria-pressed="false" aria-label="Toggle color mode">
+            <span class="sr-only">Toggle color mode</span>
+            <svg id="themeIconSun" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="M4.93 4.93l1.41 1.41"></path>
+              <path d="M17.66 17.66l1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="M4.93 19.07l1.41-1.41"></path>
+              <path d="M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg id="themeIconMoon" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3c.18 0 .35.01.53.02A7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span id="themeToggleLabel" class="text-sm font-semibold">Dark mode</span>
+          </button>
         </div>
       </div>
     </div>

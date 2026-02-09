@@ -35,6 +35,114 @@ const defaultGlossary = [
   {
     term: "Statute",
     definition: "A written law passed by a legislature."
+  },
+  {
+    term: "Affidavit",
+    definition: "A written statement confirmed by oath or affirmation, used as evidence."
+  },
+  {
+    term: "Appeal",
+    definition: "A request to a higher court to review and change a decision."
+  },
+  {
+    term: "Arbitration",
+    definition: "A dispute resolution process decided by a neutral third party."
+  },
+  {
+    term: "Bail",
+    definition: "Temporary release from custody under conditions while awaiting trial."
+  },
+  {
+    term: "Bill",
+    definition: "A proposed law introduced in Parliament."
+  },
+  {
+    term: "By-law",
+    definition: "A rule made by a local authority to govern its area."
+  },
+  {
+    term: "Cabinet Secretary",
+    definition: "The head of a government ministry in the national executive."
+  },
+  {
+    term: "Census",
+    definition: "An official count of the population."
+  },
+  {
+    term: "Constitutional petition",
+    definition: "A formal request asking a court to enforce constitutional rights or duties."
+  },
+  {
+    term: "Contempt of court",
+    definition: "Disobedience or disrespect toward a court or its orders."
+  },
+  {
+    term: "Delegated legislation",
+    definition: "Rules made by an authorized body under powers from an Act of Parliament."
+  },
+  {
+    term: "Decree",
+    definition: "A formal order issued by a court."
+  },
+  {
+    term: "Due process",
+    definition: "Fair and proper legal procedures before depriving rights or freedoms."
+  },
+  {
+    term: "Habeas corpus",
+    definition: "A court order requiring a detained person to be brought before a judge."
+  },
+  {
+    term: "Impeachment",
+    definition: "A constitutional process to remove a public official from office."
+  },
+  {
+    term: "Injunction",
+    definition: "A court order requiring a person to do or stop doing a specific act."
+  },
+  {
+    term: "Jurisdiction",
+    definition: "The legal authority of a court or body to decide cases."
+  },
+  {
+    term: "Ombudsman",
+    definition: "An independent officer who investigates complaints against public bodies."
+  },
+  {
+    term: "Referendum",
+    definition: "A public vote on a proposed law or constitutional change."
+  },
+  {
+    term: "Separation of powers",
+    definition: "Division of government functions among the executive, legislature, and judiciary."
+  },
+  {
+    term: "Statutory instrument",
+    definition: "A form of delegated legislation made under an Act."
+  },
+  {
+    term: "Subpoena",
+    definition: "A court order to appear or produce documents."
+  },
+  {
+    term: "Suffrage",
+    definition: "The right to vote in elections."
+  },
+  {
+    term: "Tribunal",
+    definition: "A body set up to resolve disputes or hear cases."
+  },
+  {
+    term: "Veto",
+    definition: "The power to reject or stop a proposed law."
+  },
+  {
+    term: "Ward",
+    definition: "A local electoral area represented by a ward member."
+  },
+  {
+    term: "Whistleblower",
+    definition: "A person who reports wrongdoing within an organization."
   }
 ];
 
@@ -111,6 +219,9 @@ const glossarySearch = document.getElementById("glossarySearch");
 const jsonStructure = document.getElementById("jsonStructure");
 const backToTop = document.getElementById("backToTop");
 const themeToggle = document.getElementById("themeToggle");
+const themeToggleLabel = document.getElementById("themeToggleLabel");
+const themeIconSun = document.getElementById("themeIconSun");
+const themeIconMoon = document.getElementById("themeIconMoon");
 
 const linkTargets = [
   "officialPdfLink",
@@ -483,8 +594,16 @@ function applyTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.classList.toggle("dark", isDark);
   if (themeToggle) {
-    themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
     themeToggle.setAttribute("aria-pressed", String(isDark));
+  }
+  if (themeToggleLabel) {
+    themeToggleLabel.textContent = isDark ? "Light mode" : "Dark mode";
+  }
+  if (themeIconSun) {
+    themeIconSun.classList.toggle("hidden", !isDark);
+  }
+  if (themeIconMoon) {
+    themeIconMoon.classList.toggle("hidden", isDark);
   }
 }
 
@@ -494,6 +613,20 @@ function initializeTheme() {
     window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   const theme = stored || (prefersDark ? "dark" : "light");
   applyTheme(theme);
+
+  if (!stored && window.matchMedia) {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (event) => {
+      if (!localStorage.getItem("theme")) {
+        applyTheme(event.matches ? "dark" : "light");
+      }
+    };
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handler);
+    } else if (mediaQuery.addListener) {
+      mediaQuery.addListener(handler);
+    }
+  }
 }
 
 function initializeContent(data) {
