@@ -57,6 +57,7 @@ const jsonTemplate = {
           title: "Sovereignty of the people",
           formalText: "Full official text goes here.",
           plainText: "Beginner-friendly explanation goes here.",
+          plainTextSw: "Maelezo rahisi ya Kiswahili yanawekwa hapa.",
           keywords: ["sovereignty", "citizens", "power"]
         }
       ]
@@ -204,6 +205,7 @@ function buildEntrySearchText(entry, section) {
     sectionLabel(section),
     entry.formalText,
     entry.plainText,
+    entry.plainTextSw,
     (entry.keywords || []).join(" ")
   ]
     .join(" ")
@@ -263,9 +265,27 @@ function createEntryCard(entry, section) {
   plainWrap.appendChild(plainLabel);
   plainWrap.appendChild(plainText);
 
+  const kiswahiliWrap = createElement(
+    "div",
+    "rounded-xl border-l-4 border-kenya-red bg-kenya-red/10 p-4"
+  );
+  const kiswahiliLabel = createElement(
+    "p",
+    "text-sm font-semibold text-kenya-red",
+    "Kiswahili"
+  );
+  const kiswahiliText = createElement(
+    "p",
+    "mt-2 whitespace-pre-line text-base leading-relaxed text-slate-800",
+    entry.plainTextSw || "Ongeza maelezo rahisi ya Kiswahili hapa."
+  );
+  kiswahiliWrap.appendChild(kiswahiliLabel);
+  kiswahiliWrap.appendChild(kiswahiliText);
+
   articleEl.appendChild(header);
   articleEl.appendChild(originalWrap);
   articleEl.appendChild(plainWrap);
+  articleEl.appendChild(kiswahiliWrap);
 
   return articleEl;
 }

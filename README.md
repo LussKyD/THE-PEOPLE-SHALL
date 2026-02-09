@@ -34,6 +34,7 @@ All content lives in `content.json` and is loaded by `script.js`. The file curre
           "title": "Sovereignty of the people",
           "formalText": "Full official text goes here.",
           "plainText": "Beginner-friendly explanation goes here.",
+          "plainTextSw": "Maelezo rahisi ya Kiswahili yanawekwa hapa.",
           "keywords": ["sovereignty", "citizens", "power"]
         }
       ]
