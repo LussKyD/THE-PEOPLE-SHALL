@@ -108,6 +108,7 @@ const clearSearch = document.getElementById("clearSearch");
 const glossaryList = document.getElementById("glossaryList");
 const glossarySearch = document.getElementById("glossarySearch");
 const jsonStructure = document.getElementById("jsonStructure");
+const backToTop = document.getElementById("backToTop");
 
 const linkTargets = [
   "officialPdfLink",
@@ -450,6 +451,15 @@ function attachListeners() {
   }
   if (glossarySearch) {
     glossarySearch.addEventListener("input", applyGlossarySearch);
+  }
+  if (backToTop) {
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    window.addEventListener("scroll", () => {
+      const shouldShow = window.scrollY > 400;
+      backToTop.classList.toggle("hidden", !shouldShow);
+    });
   }
 }
 
